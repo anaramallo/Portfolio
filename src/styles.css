@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Barra de navegación inicialmente transparente */
+.navbar {
+  height: 15vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+/* Cambiar la barra a blanco al hacer scroll */
+.navbar.scrolled {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.navbar.scrolled .nav-links a {
+  color: #333; /* Cambiar a negro cuando se hace scroll */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  padding: 100px 20px; /* Asegúrate de que haya suficiente espacio */
+  min-height: 100vh; /* Cada sección ocupa toda la pantalla */
+}
+
