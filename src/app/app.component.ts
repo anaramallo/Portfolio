@@ -4,6 +4,7 @@ import {AboutComponent} from "./core/components/about/about.component";
 import {ContactComponent} from "./core/components/contact/contact.component";
 import {ProjectsComponent} from "./core/components/projects/projects.component";
 import {HeaderComponent} from "./core/components/header/header.component";
+import { TypewriterComponent } from './core/components/typewriter/typewriter.component';
 
 @Component({
   selector: 'app-root',

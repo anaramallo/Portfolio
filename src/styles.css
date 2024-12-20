@@ -1,41 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Barra de navegación inicialmente transparente */
-.navbar {
-  height: 15vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 20px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: background-color 0.3s ease;
-}
-
-/* Cambiar la barra a blanco al hacer scroll */
-.navbar.scrolled {
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-
-
-.navbar.scrolled .nav-links a {
-  color: #333; /* Cambiar a negro cuando se hace scroll */
-}
-
 html {
   scroll-behavior: smooth;
 }
 
-section {
-  padding: 100px 20px; /* Asegúrate de que haya suficiente espacio */
-  min-height: 100vh; /* Cada sección ocupa toda la pantalla */
+body {
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 0.5vh;
 }
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1.5s ease-out;
+}
+
+@font-face {
+  font-family: 'Exo2';
+  src: url('http://localhost:5000/public/fonts/Exo2-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* Definición de la animación "Pisotón" */
+@keyframes stomp-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-1000px) scale(1.2);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(0) scale(0.9);
+  }
+  85% {
+    transform: translateY(-20px) scale(1.05);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Clase de animación para utilizar en el HTML */
+.animate-stomp-in {
+  animation: stomp-in 1.2s cubic-bezier(0.25, 1.75, 0.5, 1) forwards;
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 1s ease-in-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 1s ease-in-out forwards;
+}
+
+@keyframes slide-in-up {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Clase que se aplica inicialmente para los elementos que deben animarse */
+.animate-on-scroll {
+  opacity: 0; /* Los elementos comienzan invisibles */
+  transform: translateY(100%); /* Y desplazados hacia abajo */
+}
+
+/* Clase que se aplica cuando el elemento entra en la vista */
+.animate-slide-in-visible {
+  animation: slide-in-up 1s ease-in-out forwards;
+  opacity: 1; /* Se asegura de que el elemento sea visible */
+  transform: translateY(0); /* Posición final */
+}
+
+
+
+
 

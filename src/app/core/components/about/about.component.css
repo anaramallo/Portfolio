@@ -1,12 +1,19 @@
-.about {
-  text-align: center;
-  padding: 40px 20px;
-  background-color: #f5f5f5;
+/* Contenedor de la imagen con efecto parallax */
+.parallax-image-container {
+  position: relative;
+  overflow: hidden;
+  height: 400px; /* Ajusta la altura según sea necesario */
 }
 
-.about p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin: 20px 0;
-  color: #555;
+/* Estilo de la imagen con efecto parallax */
+.parallax-image {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%); /* Centra la imagen */
+  width: 100%;
+  height: auto;
+  will-change: transform;
+  transition: transform 0.1s ease-out; /* Suavidad del movimiento */
 }
+

@@ -1,1 +1,24 @@
-<p>projects works!</p>
+<section id="projects" class="py-20 bg-gray-50">
+  <div class="container mx-auto">
+    <!-- Título de la sección -->
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-800">Proyectos</h2>
+      <p class="text-lg text-gray-600 mt-2">
+        Aquí tienes una selección de proyectos que reflejan mi pasión por el desarrollo de software y el diseño funcional.
+      </p>
+    </div>
+
+    <!-- Contenedor de las tarjetas de proyectos -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div *ngFor="let project of projects" class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow">
+        <img [src]="project.imageUrl" [alt]="project.title" class="w-full h-48 object-cover">
+        <!--<p>{{ project | json }}</p>-->
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-800 mb-2">{{ project.title }}</h3>
+          <p class="text-gray-600 mb-4">{{ project.description }}</p>
+          <a [href]="project.link" class="text-blue-500 hover:underline">Ver proyecto</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
