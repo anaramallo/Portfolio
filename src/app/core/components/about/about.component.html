@@ -1,7 +1,7 @@
 <section id="about" class="relative h-[50vh] overflow-hidden bg-gray-100">
   <!-- Imagen en la parte superior con ajustes de corte -->
   <div class="absolute inset-0 w-full h-full">
-    <img src="http://localhost:5000/images/yo.jpg"
+    <img [src]="aboutImageUrl"
          alt="Ana María"
          class="w-full h-full object-cover object-[center_top] md:object-[20%_25%]">
   </div>
@@ -62,15 +62,14 @@
   </div>
 </section>
 
-<section id="about-parallax" class="relative py-20 px-8 bg-fixed bg-center bg-cover" style="background-image: url('http://localhost:5000/images/parallax.jpg');"><!-- Overlay -->
+<section id="about-parallax" class="relative py-20 px-8 bg-fixed bg-center bg-cover" [style.backgroundImage]="'url(' + API + '/images/parallax.jpg)'"><!-- Overlay -->
   <div class="container mx-auto max-w-4xl">
     <!-- Tarjetas de Educación y Experiencia -->
     <div class="flex flex-col md:flex-row gap-10 items-center justify-center mt-16 relative z-10">
       <!-- Sección Educación -->
       <div class="bg-white rounded-lg shadow-lg p-10 text-center w-full md:w-2/3 h-[550px] animate-on-scroll">
         <div class="flex flex-col items-center gap-4 mb-4">
-          <img src="http://localhost:5000/icons/education.svg" alt="Icono Educación" class="w-12 h-12">
-          <h3 class="text-3xl font-bold text-gray-800 uppercase">Educación</h3>
+          <img [src]="API + '/icons/education.svg'" alt="Icono Educación" class="w-12 h-12">          <h3 class="text-3xl font-bold text-gray-800 uppercase">Educación</h3>
         </div>
         <p class="text-lg text-gray-700 leading-relaxed font-normal max-w-lg text-justify">
           <span class="font-bold">Ciclo Superior en DAM:</span> Formación en Desarrollo de Aplicaciones Multiplataforma, incluyendo Java, SQL, y NoSQL. <br><br>
@@ -80,8 +79,7 @@
       <!-- Sección Experiencia Profesional -->
       <div class="bg-white rounded-lg shadow-lg p-10 text-center w-full md:w-2/3 h-[550px] animate-on-scroll">
         <div class="flex flex-col items-center gap-4 mb-4">
-          <img src="http://localhost:5000/icons/experience.svg" alt="Icono Experiencia Profesional" class="w-12 h-12">
-          <h3 class="text-3xl font-bold text-gray-800 uppercase">Experiencia Profesional</h3>
+          <img [src]="API + '/icons/experience.svg'" alt="Icono Experiencia Profesional" class="w-12 h-12">          <h3 class="text-3xl font-bold text-gray-800 uppercase">Experiencia Profesional</h3>
         </div>
         <p class="text-lg text-gray-700 leading-relaxed font-normal max-w-lg text-justify">
           <span class="font-bold">Analista Funcional en Altia</span> (Proyecto Inditex): Encargado de análisis de funcionalidades, mejoras y tareas de comunicación con el equipo de desarrollo. <br><br>
@@ -103,33 +101,27 @@
     <div class="flex flex-wrap items-center justify-center gap-12 mt-12">
       <!-- Icono Java -->
       <div class="text-center">
-        <img src="http://localhost:5000/icons/java.svg" alt="Java" class="w-16 h-16 mx-auto mb-2">
-      </div>
+        <img [src]="API + '/icons/java.svg'" alt="Java" class="w-16 h-16 mx-auto mb-2" loading="lazy" width="64" height="64">      </div>
 
       <!-- Icono HTML/CSS -->
       <div class="text-center">
-        <img src="http://localhost:5000/icons/css.svg" alt="HTML & CSS" class="w-16 h-16 mx-auto mb-2">
-      </div>
+        <img [src]="API + '/icons/css.svg'" alt="HTML & CSS" class="w-16 h-16 mx-auto mb-2" loading="lazy" width="64" height="64">      </div>
 
       <!-- Icono JavaScript -->
       <div class="text-center">
-        <img src="http://localhost:5000/icons/js.svg" alt="JavaScript" class="w-16 h-16 mx-auto mb-2">
-      </div>
+        <img [src]="API + '/icons/js.svg'" alt="JavaScript" class="w-16 h-16 mx-auto mb-2" loading="lazy" width="64" height="64">      </div>
 
       <!-- Icono Android Studio -->
       <div class="text-center">
-        <img src="http://localhost:5000/icons/android.svg" alt="Android Studio" class="w-16 h-16 mx-auto mb-2">
-      </div>
+        <img [src]="API + '/icons/android.svg'" alt="Android Studio" class="w-16 h-16 mx-auto mb-2" loading="lazy" width="64" height="64">      </div>
 
       <!-- Icono SQL -->
       <div class="text-center">
-        <img src="http://localhost:5000/icons/sql.svg" alt="Bases de Datos" class="w-16 h-16 mx-auto mb-2">
-      </div>
+        <img [src]="API + '/icons/sql.svg'" alt="Bases de Datos" class="w-16 h-16 mx-auto mb-2" loading="lazy" width="64" height="64">      </div>
 
       <!-- Icono mongo -->
       <div class="text-center">
-        <img src="http://localhost:5000/icons/mongo.svg" alt="MongoDB" class="w-16 h-16 mx-auto mb-2">
-      </div>
+        <img [src]="API + '/icons/mongo.svg'" alt="MongoDB" class="w-16 h-16 mx-auto mb-2" loading="lazy" width="64" height="64">      </div>
     </div>
   </div>
 </section>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {JsonPipe, NgForOf, NgOptimizedImage} from "@angular/common";
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-projects',
@@ -14,23 +15,25 @@ import {JsonPipe, NgForOf, NgOptimizedImage} from "@angular/common";
 })
 export class ProjectsComponent {
 
+  API = environment.API_BASE_URL;
+
   projects = [
     {
       title: 'Análisis de Datos',
       description: 'Procesamiento de datos para predecir tendencias usando Machine Learning.',
-      imageUrl: 'http://localhost:5000/images/p1_mlearning.jpg',
+      imageUrl: `${this.API}/images/p1_mlearning.jpg`,
       link: '#'
     },
     {
       title: 'Portfolio Interactivo',
       description: 'Creación de un portfolio responsivo con Angular para destacar mis habilidades.',
-      imageUrl: 'http://localhost:5000/images/p3_portfolio.png',
+      imageUrl: `${this.API}/images/p3_portfolio.png`,
       link: '#'
     },
     {
       title: 'Aplicación reservas parking autocaravanas',
       description: 'Desarrollo de una app móvil para seguimiento de hábitos y objetivos.',
-      imageUrl: 'http://localhost:5000/images/p2_parking.jpg',
+      imageUrl: `${this.API}/images/p2_parking.jpg`,
       link: '#'
     }
   ];

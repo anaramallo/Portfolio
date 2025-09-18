@@ -9,8 +9,7 @@
     <!-- Menu Toggle Button-->
     <div class="md:hidden">
       <button (click)="toggleMenu()" class="focus:outline-none">
-        <img src="http://localhost:5000/icons/menu.svg" alt="Menu" class="w-8 h-8 bg-white">
-      </button>
+        <img [ngSrc]="API + '/icons/menu.svg'" alt="" width="32" height="32" class="w-8 h-8">      </button>
     </div>
     <!-- Navigation Links -->
     <ul [ngClass]="{'hidden': !menuOpen, 'flex': menuOpen }"

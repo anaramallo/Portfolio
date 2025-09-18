@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, ElementRef, Renderer2} from '@angular/core';
 import {NgStyle} from "@angular/common";
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-about',
@@ -12,13 +13,14 @@ import {NgStyle} from "@angular/common";
 })
 export class AboutComponent implements AfterViewInit {
 
-  aboutImageUrl : string = 'http://localhost:5000/images/yo.jpg';
+  API = environment.API_BASE_URL;
+  aboutImageUrl: string = `${this.API}/images/yo.jpg`;
+
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngAfterViewInit(): void {
     // Seleccionar todos los elementos que queremos observar
     const elementsToAnimate = this.el.nativeElement.querySelectorAll('.animate-on-scroll');
-
 
     // Opciones para el observer
     const options = {

@@ -1,53 +1,63 @@
-import { Component, Input, OnInit } from '@angular/core';
-import {NgIf} from "@angular/common";
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { NgIf } from "@angular/common";
 
 @Component({
   selector: 'app-typewriter',
   templateUrl: './typewriter.component.html',
   styleUrls: ['./typewriter.component.css'],
   standalone: true,
-  imports: [
-    NgIf
-  ]
+  imports: [NgIf]
 })
-export class TypewriterComponent implements OnInit {
-  @Input() texts: string[] = []; // Lista de textos que queremos mostrar
-  displayedText = ''; // Texto que se está mostrando actualmente
-  currentTextIndex = 0; // Índice del texto actual
-  isAdding = true; // Indicador de sse está escribiendo
-  typingSpeed = 150; // Velocidad de la escritura en milisegundos
-  delayBetweenTexts = 2000; // Tiempo que se muestra cada frase antes de cambiar (en milisegundos)
+export class TypewriterComponent implements OnInit, OnDestroy {
+  @Input() texts: string[] = []; // Frases que se mostrarán
+  @Input() typingSpeed = 150; // Velocidad en ms
+  @Input() delayBetweenTexts = 2000; // Tiempo visible antes de borrar
+  @Input() deletingSpeed = 75; // Velocidad al borrar (opcional)
+
+  displayedText = '';
+  currentTextIndex = 0;
+  isAdding = true;
+  private timeoutRef: any;
 
   ngOnInit(): void {
     this.startTypingLoop();
   }
 
-  // Iniciar el bucle de escribir y cambiar de frases
-  startTypingLoop(): void {
-    this.typewrite(); // Empezar a escribir la primera frase
+  ngOnDestroy(): void {
+    // Evitar que siga corriendo cuando el componente se destruye
+    if (this.timeoutRef) {
+      clearTimeout(this.timeoutRef);
+    }
   }
 
-  // Método que controla la lógica de escribir y eliminar el texto
-  typewrite(): void {
-    setTimeout(() => {
-      const currentText = this.texts[this.currentTextIndex];
+  private startTypingLoop(): void {
+    this.typewrite();
+  }
 
-      if (this.isAdding) {
-        // Modo escribir
-        if (this.displayedText.length < currentText.length) {
-          this.displayedText += currentText[this.displayedText.length]; // Añade la siguiente letra
-          this.typewrite(); // Llama de nuevo para continuar escribiendo
-        } else {
-          // Cuando termina de escribir la frase
-          this.isAdding = false; // Cambia a esperar antes de borrar o cambiar frase
-          setTimeout(() => {
-            this.isAdding = true; // Prepararse para la siguiente frase
-            this.currentTextIndex = (this.currentTextIndex + 1) % this.texts.length; // Cambia al siguiente texto
-            this.displayedText = ''; // Vacía el texto mostrado
-            this.typewrite(); // Llama de nuevo para empezar a escribir la siguiente frase
-          }, this.delayBetweenTexts); // Espera antes de pasar a la siguiente frase
-        }
+  private typewrite(): void {
+    const currentText = this.texts[this.currentTextIndex];
+
+    if (this.isAdding) {
+      // Escribiendo
+      if (this.displayedText.length < currentText.length) {
+        this.displayedText += currentText[this.displayedText.length];
+        this.timeoutRef = setTimeout(() => this.typewrite(), this.typingSpeed);
+      } else {
+        // Espera antes de borrar
+        this.isAdding = false;
+        this.timeoutRef = setTimeout(() => this.typewrite(), this.delayBetweenTexts);
       }
-    }, this.typingSpeed);
+    } else {
+      // Borrando (letra por letra)
+      if (this.displayedText.length > 0) {
+        this.displayedText = this.displayedText.substring(0, this.displayedText.length - 1);
+        this.timeoutRef = setTimeout(() => this.typewrite(), this.deletingSpeed);
+      } else {
+        // Pasa a la siguiente frase
+        this.isAdding = true;
+        this.currentTextIndex = (this.currentTextIndex + 1) % this.texts.length;
+        this.timeoutRef = setTimeout(() => this.typewrite(), this.typingSpeed);
+      }
+    }
   }
 }
