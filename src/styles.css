@@ -116,6 +116,11 @@ body {
   transform: translateY(0); /* Posición final */
 }
 
+/*Estilos a badges*/
+.badge {
+  @apply px-2.5 py-1 rounded-full text-xs font-medium
+  bg-white text-slate-700 ring-1 ring-slate-300;}
+
 
 
 
