@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
   logoUrl = `${this.API}/icons/yo2.svg`;        // tu logo
   // si tienes versión dark/light, añade otro:
   // logoDarkUrl = `${this.API}/icons/yo_dark.svg`;
+  headerBgUrl = `${this.API}/images/header.jpg`;
 
   menuOpen = false;
   isScrolled = false;

@@ -9,7 +9,6 @@
 }
 
 .hero {
-  background-image: url('http://localhost:5000/images/header.jpg');
   background-size: cover;
   background-color: #007bff;
   background-position: center;

@@ -34,7 +34,7 @@ body {
 
 @font-face {
   font-family: 'Exo2';
-  src: url('http://localhost:5000/public/fonts/Exo2-Light.ttf') format('truetype');
+  src: url('https://portfolio-api-dvx9.onrender.com') format('truetype');
   font-weight: 300;
   font-style: normal;
 }
