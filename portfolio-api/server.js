@@ -13,14 +13,22 @@ const ALLOWED_ORIGINS = [
   'http://localhost:4200',
   'https://portfolio-od9xljtj4-anas-projects-32179dfc.vercel.app' // <-- cámbialo por tu dominio real de Vercel
 ];
+
 app.use(cors({
-  origin(origin, cb) {
-    if (!origin) return cb(null, true); // permite curl/postman
-    if (ALLOWED_ORIGINS.includes(origin)) return cb(null, true);
-    return cb(new Error('CORS: origin not allowed'));
+  origin: (origin, cb) => {
+    if (
+      !origin ||
+      ALLOWED_ORIGINS.includes(origin) ||
+      /^https:\/\/.*\.vercel\.app$/.test(origin)
+    ) {
+      cb(null, true);
+    } else {
+      console.error("CORS blocked origin:", origin);
+      cb(new Error('CORS: origin not allowed'));
+    }
   },
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  methods: ['GET','POST','OPTIONS'],
+  allowedHeaders: ['Content-Type','Authorization']
 }));
 
 // === 2) Seguridad + compresión ===
