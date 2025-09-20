@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000;
 // === 1) CORS: limita a tus orígenes (ajusto tras desplegar en Vercel) ===
 const ALLOWED_ORIGINS = [
   'http://localhost:4200',
-  'https://TU-APP.vercel.app' // <-- cámbialo por tu dominio real de Vercel
+  'https://portfolio-od9xljtj4-anas-projects-32179dfc.vercel.app' // <-- cámbialo por tu dominio real de Vercel
 ];
 app.use(cors({
   origin(origin, cb) {
