@@ -1,4 +1,4 @@
 export const environment = {
   production: 'true',
-  API_BASE_URL: 'https://TU-API.onrender.com' // <- tu URL pública (Render)
+  API_BASE_URL: 'https://portfolio-api-dvx9.onrender.com' // url render
 };
