@@ -16,6 +16,10 @@ body {
   font-family: 'Open Sans', sans-serif;
   letter-spacing: 0.5vh;
 }
+ /*Quitar scroll horizonttal*/
+html, body {
+  overflow-x: hidden;
+}
 
 @keyframes fade-in {
   0% {

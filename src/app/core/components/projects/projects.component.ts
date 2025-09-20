@@ -16,6 +16,7 @@ import { environment } from '../../../../environments/environment';
 export class ProjectsComponent {
 
   API = environment.API_BASE_URL;
+  projectImageUrl: string = `${this.API}/images/proyectos.jpg`;
 
   projects = [
     {

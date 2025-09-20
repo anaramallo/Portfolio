@@ -22,9 +22,12 @@ export class HeaderComponent implements OnInit {
   // === API / logos desde tu backend ===
   API = environment.API_BASE_URL;
   logoUrl = `${this.API}/icons/yo2.svg`;        // tu logo
-  // si tienes versión dark/light, añade otro:
-  // logoDarkUrl = `${this.API}/icons/yo_dark.svg`;
   headerBgUrl = `${this.API}/images/header.jpg`;
+  menuIconBlack = `${this.API}/icons/menu.svg`;
+  menuIconWhite = `${this.API}/icons/menublanco.svg`;
+  get menuIcon(): string {
+    return this.isScrolled ? this.menuIconBlack : this.menuIconWhite;
+  }
 
   menuOpen = false;
   isScrolled = false;

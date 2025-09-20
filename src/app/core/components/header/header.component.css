@@ -35,3 +35,7 @@
   color: white;
 }
 
+.icon-invert {
+  filter: invert(1) brightness(200%);
+}
+
