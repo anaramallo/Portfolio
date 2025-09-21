@@ -1,63 +1,52 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { NgIf } from "@angular/common";
 
 @Component({
   selector: 'app-typewriter',
   templateUrl: './typewriter.component.html',
   styleUrls: ['./typewriter.component.css'],
-  standalone: true,
-  imports: [NgIf]
+  standalone: true
 })
 export class TypewriterComponent implements OnInit, OnDestroy {
-  @Input() texts: string[] = []; // Frases que se mostrarán
-  @Input() typingSpeed = 150; // Velocidad en ms
-  @Input() delayBetweenTexts = 2000; // Tiempo visible antes de borrar
-  @Input() deletingSpeed = 75; // Velocidad al borrar (opcional)
+  @Input() texts: string[] = [];
+  @Input() typingSpeed = 120;        // ms por carácter
+  @Input() delayBetweenTexts = 1800; // tiempo visible antes de desaparecer
+  @Input() fadeDuration = 500;       // ms del desvanecido
+  @Input() pauseBeforeNext = 200;    // pausa en blanco antes de empezar la siguiente
 
   displayedText = '';
   currentTextIndex = 0;
-  isAdding = true;
-  private timeoutRef: any;
+  isFading = false;
+
+  private timeoutRef: any = null;
 
   ngOnInit(): void {
-    this.startTypingLoop();
+    this.typeNextChar();
   }
 
   ngOnDestroy(): void {
-    // Evitar que siga corriendo cuando el componente se destruye
-    if (this.timeoutRef) {
-      clearTimeout(this.timeoutRef);
-    }
+    if (this.timeoutRef) clearTimeout(this.timeoutRef);
   }
 
-  private startTypingLoop(): void {
-    this.typewrite();
+  private typeNextChar(): void {
+    const full = this.texts[this.currentTextIndex] ?? '';
+
+    if (this.displayedText.length < full.length) {
+      this.displayedText += full[this.displayedText.length];
+      this.timeoutRef = setTimeout(() => this.typeNextChar(), this.typingSpeed);
+      return;
+    }
+
+    // Texto completo mostrado: espera y luego desvanece
+    this.timeoutRef = setTimeout(() => this.startFadeOut(), this.delayBetweenTexts);
   }
 
-  private typewrite(): void {
-    const currentText = this.texts[this.currentTextIndex];
-
-    if (this.isAdding) {
-      // Escribiendo
-      if (this.displayedText.length < currentText.length) {
-        this.displayedText += currentText[this.displayedText.length];
-        this.timeoutRef = setTimeout(() => this.typewrite(), this.typingSpeed);
-      } else {
-        // Espera antes de borrar
-        this.isAdding = false;
-        this.timeoutRef = setTimeout(() => this.typewrite(), this.delayBetweenTexts);
-      }
-    } else {
-      // Borrando (letra por letra)
-      if (this.displayedText.length > 0) {
-        this.displayedText = this.displayedText.substring(0, this.displayedText.length - 1);
-        this.timeoutRef = setTimeout(() => this.typewrite(), this.deletingSpeed);
-      } else {
-        // Pasa a la siguiente frase
-        this.isAdding = true;
-        this.currentTextIndex = (this.currentTextIndex + 1) % this.texts.length;
-        this.timeoutRef = setTimeout(() => this.typewrite(), this.typingSpeed);
-      }
-    }
+  private startFadeOut(): void {
+    this.isFading = true;
+    this.timeoutRef = setTimeout(() => {
+      this.isFading = false;
+      this.displayedText = '';
+      this.currentTextIndex = (this.currentTextIndex + 1) % this.texts.length;
+      this.timeoutRef = setTimeout(() => this.typeNextChar(), this.pauseBeforeNext);
+    }, this.fadeDuration);
   }
 }

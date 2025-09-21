@@ -13,8 +13,8 @@ html {
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
-  letter-spacing: 0.5vh;
+  font-family: 'Roboto', sans-serif;
+
 }
  /*Quitar scroll horizonttal*/
 html, body {
@@ -121,9 +121,23 @@ html, body {
 }
 
 /*Estilos a badges*/
-.badge {
-  @apply px-2.5 py-1 rounded-full text-xs font-medium
-  bg-white text-slate-700 ring-1 ring-slate-300;}
+/* Base */
+.badge{
+  @apply inline-flex items-center px-2 py-1 rounded-full text-xs font-medium
+  bg-white text-slate-700 ring-1 ring-slate-300
+  hover:bg-slate-50 transition-colors duration-200;
+}
+
+/* ≥768px */
+@screen md {
+  .badge{ @apply text-sm px-3 py-1.5; }
+}
+
+/* ≥1024px */
+@screen lg {
+  .badge{ @apply text-base px-3.5 py-2; }
+}
+
 
 .font-exo {
   font-family: 'Exo 2', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
