@@ -78,4 +78,19 @@ export class HeaderComponent implements OnInit {
 
   private updateScreenWidth() { this.isMobile = window.innerWidth < 768; }
   private lockBody(lock: boolean) { document.body.style.overflow = lock ? 'hidden' : ''; }
+
+  getLogoClasses() {
+    return this.isScrolled ? 'text-black' : 'text-white';
+  }
+
+  getLinkClasses() {
+    return (this.isScrolled && !this.isMobile) ? 'text-black' : 'text-white';
+  }
+
+
+
+
 }
+
+
+
