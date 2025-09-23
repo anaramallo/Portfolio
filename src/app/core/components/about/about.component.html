@@ -1,100 +1,161 @@
-<section id="about" class="relative h-[50vh] overflow-hidden bg-gray-100">
-  <!-- Imagen en la parte superior con ajustes de corte -->
-  <div class="absolute inset-0 w-full h-full">
-    <img [src]="aboutImageUrl"
-         alt="Ana María"
-         class="w-full h-full object-cover object-[center_top] md:object-[20%_25%]">
+<!-- HERO SOBRE MÍ -->
+<section id="about"
+         class="overflow-hidden bg-gray-100
+                h-[34vh] sm:h-[42vh] md:h-[52vh] lg:h-[60vh] xl:h-[64vh] 2xl:h-[66vh]">
+
+  <!-- Contenedor RELATIVO para img[fill] -->
+  <div class="relative h-full w-full">
+    <img
+      [ngSrc]="aboutImageUrl"
+      alt="Ana María"
+      fill
+      sizes="100vw"
+      priority
+      class="object-cover
+             /* encuadre: igual en md, subimos en lg/xl */
+             object-[50%_26%]
+             md:object-[50%_30%]
+             lg:object-[50%_20%]
+             xl:object-[50%_18%]
+             2xl:object-[50%_16%]
+             transition-[object-position] duration-300 ease-out" />
   </div>
 </section>
+
+
 
 <!-- Texto bajo la imagen -->
 <section id="about-text" class="bg-white py-20 px-8">
-  <div class="container mx-auto max-w-4xl">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-      <div>
-        <div class="font-bold mb-4">
-          <h2 class="text-2xl text-gray-800 mb-6 text-left">
-            MI HISTORIA
-          </h2>
-        </div>
-        <div class="text-lg text-gray-700 leading-relaxed font-normal max-w-lg">
-          <p class="mb-5">
-            Mi nombre es Ana Mª Ramallo, desarrolladora de aplicaciones apasionada por aprender y explorar las tecnologías más innovadoras del mercado.
-          </p>
-          <p class="mb-5">
-            En mi tiempo libre, dedico mis esfuerzos a crear proyectos que me permitan descubrir nuevas posibilidades en el desarrollo de software.
-          </p>
-          <p class="mb-5">
-            Aunque aún tengo mucho por aprender, lo que me define es mi curiosidad y mis ganas de absorber cada nuevo conocimiento y técnica que pueda mejorar mis habilidades.
-          </p>
-        </div>
-      </div>
+  <div class="container mx-auto max-w-5xl">
 
-      <!-- Timeline sin tarjetas -->
-      <div class="timeline max-w-full mx-auto md:ml-10">
-        <div class="space-y-8 leading-relaxed font-light text-sm">
-          <div class="flex items-start space-x-4 animate-on-scroll">
-            <div class="h-3 w-3 bg-blue-500 rounded-full flex-shrink-0 mt-1"></div>
-            <div>
-              <h3 class="text-lg text-blue-700 leading-relaxed font-bold max-w-lg">2020</h3>
-              <p class="text-lg text-gray-700 leading-relaxed font-normal max-w-lg">Descubriendo el desarrollo de software cursando Desarrollador de Aplicaciones Multiplataforma (DAM).</p>
-            </div>
+    <!-- Título -->
+    <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-6 md:mb-8 tracking-widest text-left md:text-center">
+      ENTRE LÍNEAS
+    </h2>
+
+    <!-- Texto principal (centrado en md+) -->
+    <div class="max-w-prose text-lg text-gray-700 leading-relaxed font-normal mx-0 md:mx-auto text-left md:text-center">
+      <p class="mb-5">Buenas!</p>
+      <p class="mb-5">
+        Soy Ana y me encanta la idea de crear cosas con código. Para mí, programar no es solo escribir líneas en una pantalla,
+        sino dar vida a ideas que antes solo existían en mi cabeza.
+      </p>
+      <p class="mb-5">
+        Me gusta experimentar con nuevas tecnologías, equivocarme, romper, aprender y volver a intentarlo. Cada proyecto personal
+        es como un pequeño laboratorio donde pruebo y descubro.
+      </p>
+    </div>
+
+    <!-- Timeline debajo (vertical en móvil / horizontal en md+) -->
+    <div class="timeline relative mt-10 md:mt-14">
+
+      <!-- Línea vertical (solo móvil) -->
+      <div class="absolute left-3 top-0 bottom-0 w-px bg-blue-300/60 md:hidden"></div>
+      <!-- Línea horizontal (md+) -->
+      <div class="hidden md:block absolute inset-x-0 top-4 h-px bg-blue-300/60"></div>
+
+      <!-- Ítems: 1 col en móvil / 3 cols en md+ -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mt-0 md:mt-8">
+        <!-- 2020 -->
+        <div class="relative animate-on-scroll">
+          <span class="absolute top-1 md:top-0 -left-[7px] md:left-1/2 md:-translate-x-1/2
+                       block w-3 h-3 md:w-4 md:h-4 rounded-full bg-blue-600 ring-4 ring-white"></span>
+          <div class="pl-6 md:pl-0 md:pt-6 max-w-prose md:mx-auto text-left md:text-center">
+            <h3 class="text-base md:text-lg font-bold text-blue-700 leading-relaxed">2020</h3>
+            <p class="text-base md:text-lg text-gray-700 leading-relaxed">
+              Descubriendo el desarrollo de software cursando
+              <span class="font-medium">Desarrollador de Aplicaciones Multiplataforma (DAM)</span>.
+            </p>
           </div>
+        </div>
 
-          <div class="flex items-start space-x-4 animate-on-scroll">
-            <div class="h-3 w-3 bg-blue-500 rounded-full flex-shrink-0 mt-1"></div>
-            <div>
-              <h3 class="text-lg text-blue-700 leading-relaxed font-bold max-w-lg">2022</h3>
-              <p class="text-lg text-gray-700 leading-relaxed font-normal max-w-lg">Primeros pasos como analista funcional en Altia trabajando en un proyecto Inditex y sigo aprendiendo actualmente.</p>
-            </div>
+        <!-- 2022 -->
+        <div class="relative animate-on-scroll">
+          <span class="absolute top-1 md:top-0 -left-[7px] md:left-1/2 md:-translate-x-1/2
+                       block w-3 h-3 md:w-4 md:h-4 rounded-full bg-blue-600 ring-4 ring-white"></span>
+          <div class="pl-6 md:pl-0 md:pt-6 max-w-prose md:mx-auto text-left md:text-center">
+            <h3 class="text-base md:text-lg font-bold text-blue-700 leading-relaxed">2022</h3>
+            <p class="text-base md:text-lg text-gray-700 leading-relaxed">
+              Primeros pasos como <span class="font-medium">analista funcional en Altia</span> en un proyecto Inditex; sigo aprendiendo actualmente.
+            </p>
           </div>
+        </div>
 
-          <div class="flex items-start space-x-4 animate-on-scroll">
-            <div class="h-3 w-3 bg-blue-500 rounded-full flex-shrink-0 mt-1"></div>
-            <div>
-              <h3 class="text-lg text-blue-700 leading-relaxed font-bold max-w-lg">Actualmente</h3>
-              <p class="text-lg text-gray-700 leading-relaxed font-normal max-w-lg">Continúo adquiriendo conocimientos de desarrollo de software estudiando el Grado de Ingeniería Informática en la UNED.</p>
-            </div>
+        <!-- Actualmente -->
+        <div class="relative animate-on-scroll">
+          <span class="absolute top-1 md:top-0 -left-[7px] md:left-1/2 md:-translate-x-1/2
+                       block w-3 h-3 md:w-4 md:h-4 rounded-full bg-blue-600 ring-4 ring-white"></span>
+          <div class="pl-6 md:pl-0 md:pt-6 max-w-prose md:mx-auto text-left md:text-center">
+            <h3 class="text-base md:text-lg font-bold text-blue-700 leading-relaxed">Actualmente</h3>
+            <p class="text-base md:text-lg text-gray-700 leading-relaxed">
+              Continúo formándome en el <span class="font-medium">Grado de Ingeniería Informática</span> en la UNED.
+            </p>
           </div>
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
-<section id="about-parallax" class="relative py-20 px-8 bg-fixed bg-center bg-cover" [style.backgroundImage]="'url(' + API + '/images/parallax.jpg)'"><!-- Overlay -->
-  <div class="container mx-auto max-w-4xl">
-    <!-- Tarjetas de Educación y Experiencia -->
-    <div class="flex flex-col md:flex-row gap-10 items-center justify-center mt-16 relative z-10">
-      <!-- Sección Educación -->
-      <div class="bg-white rounded-lg shadow-lg p-10 text-center w-full md:w-2/3 h-[550px] animate-on-scroll">
+
+<section id="about-parallax"
+         class="relative py-20 px-4 sm:px-6 lg:px-8 bg-fixed bg-center bg-cover"
+         [style.backgroundImage]="'url(' + API + '/images/parallax.jpg)'">
+
+  <!-- Overlay -->
+  <div class="container mx-auto max-w-6xl relative z-10">
+    <!-- Grid Responsive de Educación y Experiencia -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 mt-12">
+
+      <!-- Tarjeta Educación -->
+      <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 lg:p-10
+                  flex flex-col items-center text-center
+                  transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
         <div class="flex flex-col items-center gap-4 mb-4">
-          <img [src]="API + '/icons/education.svg'" alt="Icono Educación" class="w-12 h-12">          <h3 class="text-3xl font-bold text-gray-800 uppercase">Educación</h3>
+          <img [src]="API + '/icons/education.svg'"
+               alt="Icono Educación"
+               class="w-12 h-12">
+          <h3 class="text-base sm:text-lg md:text-xl xl:text-2xl
+                     font-semibold text-gray-900
+                     leading-tight tracking-normal mb-3 md:mb-4">
+            EDUCACIÓN
+          </h3>
         </div>
-        <p class="text-lg text-gray-700 leading-relaxed font-normal max-w-lg text-justify">
-          <span class="font-bold">Ciclo Superior en DAM:</span> Formación en Desarrollo de Aplicaciones Multiplataforma, incluyendo Java, SQL, y NoSQL. <br><br>
+        <p class="text-base sm:text-base md:text-lg text-gray-700 leading-relaxed font-normal text-justify flex-grow">
+          <span class="font-bold">Ciclo Superior en DAM:</span> Formación en Desarrollo de Aplicaciones Multiplataforma, incluyendo Java, SQL y NoSQL. <br><br>
           Actualmente, continúo mis estudios en <span class="font-bold">Ingeniería Informática</span> en la UNED, expandiendo mis conocimientos en programación.
         </p>
       </div>
-      <!-- Sección Experiencia Profesional -->
-      <div class="bg-white rounded-lg shadow-lg p-10 text-center w-full md:w-2/3 h-[550px] animate-on-scroll">
+
+      <!-- Tarjeta Experiencia -->
+      <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 lg:p-10
+                  flex flex-col items-center text-center
+                  transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
         <div class="flex flex-col items-center gap-4 mb-4">
-          <img [src]="API + '/icons/experience.svg'" alt="Icono Experiencia Profesional" class="w-12 h-12">          <h3 class="text-3xl font-bold text-gray-800 uppercase">Experiencia Profesional</h3>
+          <img [src]="API + '/icons/experience.svg'"
+               alt="Icono Experiencia Profesional"
+               class="w-12 h-12">
+          <h3 class="text-base sm:text-lg md:text-xl xl:text-2xl
+                     font-semibold text-gray-900
+                     leading-tight tracking-normal mb-3 md:mb-4">
+            EXPERIENCIA PROFESIONAL
+          </h3>
         </div>
-        <p class="text-lg text-gray-700 leading-relaxed font-normal max-w-lg text-justify">
-          <span class="font-bold">Analista Funcional en Altia</span> (Proyecto Inditex): Encargado de análisis de funcionalidades, mejoras y tareas de comunicación con el equipo de desarrollo. <br><br>
-          Además, gestiono análisis de datos, logs e informes para mejorar los procesos.
+        <p class="text-base sm:text-base md:text-lg text-gray-700 leading-relaxed font-normal text-justify flex-grow">
+          <span class="font-bold">Analista Funcional en Altia</span> (Proyecto Inditex): Análisis de funcionalidades, mejoras y comunicación con el equipo de desarrollo. <br><br>
+          Además, gestiono análisis de datos, logs e informes para mejorar procesos.
         </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Habilidades Técnicas en una nueva sección -->
+<!-- Habilidades Técnicas-->
 <section id="skills-section" class="bg-white py-20 px-8">
   <div class="container mx-auto max-w-5xl text-center">
     <div class="mb-10">
-      <h2 class="text-2xl font-bold text-gray-800 uppercase">Habilidades Técnicas</h2>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">HABILIDADES TÉCNICAS</h2>
     </div>
 
     <!-- Iconos de habilidades alineados horizontalmente -->

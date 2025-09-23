@@ -1,12 +1,13 @@
 import {AfterViewInit, Component, ElementRef, Renderer2} from '@angular/core';
-import {NgStyle} from "@angular/common";
+import {NgOptimizedImage, NgStyle} from "@angular/common";
 import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-about',
   standalone: true,
   imports: [
-    NgStyle
+    NgStyle,
+    NgOptimizedImage
   ],
   templateUrl: './about.component.html',
   styleUrl: './about.component.css'
