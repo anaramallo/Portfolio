@@ -33,11 +33,13 @@
     </div>
 
     <!-- Grid responsive de tarjetas -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 items-stretch">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 items-stretch">
       <article *ngFor="let project of projects"
                class="group bg-white rounded-2xl shadow-sm ring-1 ring-black/5
                       transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:ring-black/10
-                      h-full flex flex-col">
+                      h-full flex flex-col relative">
+
+        <app-project-badge [status]="project.status"></app-project-badge>
 
         <!-- Imagen (relación 16:9 para evitar saltos) -->
         <img [ngSrc]="project.imageUrl"
@@ -54,17 +56,12 @@
           <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-4 flex-grow">
             {{ project.description }}
           </p>
-
-          <a [href]="project.link"
-             target="_blank" rel="noopener noreferrer"
-             class="inline-block mt-auto px-4 sm:px-6 py-2 sm:py-2.5
-                    text-sm sm:text-base font-medium
-                    bg-blue-500 text-white rounded-lg
-                    hover:bg-blue-600
-                    focus-visible:outline focus-visible:outline-2
-                    focus-visible:outline-offset-2 focus-visible:outline-blue-600">
-            Ver proyecto
-          </a>
+          <!--CTA REUTILIZABLE: Decide qué mostrar -->
+          <app-project-cta
+            [status]="project.status"
+            [href]="project.link"
+            [ariaLabel]="'Ver ' + project.title">
+          </app-project-cta>
         </div>
       </article>
     </div>
