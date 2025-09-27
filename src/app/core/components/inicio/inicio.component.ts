@@ -21,11 +21,14 @@ import { ProjectCtaComponent } from '../../../shared/ui/project-cta.component';
 })
 export class InicioComponent {
   private api = environment.API_BASE_URL.replace(/\/+$/, '');
-  private img(path: string): string {        // 👈 método, más robusto en TS
+  private img(path: string): string {
     return `${this.api}/${path.replace(/^\/+/, '')}`;
   }
+  private asset = (p: string) => `${this.api}/${p.replace(/^\/+/, '')}`;
 
   heroImageUrl = this.img('images/header.jpg');
+  cvViewUrl = this.asset('docs/anacv.pdf');
+  cvDownloadUrl  = this.asset('cv/download');
 
   // Tipado completo
   homeProjects: Array<Project & { imageUrl: string }> =

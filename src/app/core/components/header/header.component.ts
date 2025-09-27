@@ -86,10 +86,6 @@ export class HeaderComponent implements OnInit {
   getLinkClasses() {
     return (this.isScrolled && !this.isMobile) ? 'text-black' : 'text-white';
   }
-
-
-
-
 }
 
 
