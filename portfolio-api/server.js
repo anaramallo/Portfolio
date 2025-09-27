@@ -47,7 +47,7 @@ app.use('/images', express.static(path.join(__dirname, 'images'), staticOpts));
 app.use('/icons',  express.static(path.join(__dirname, 'icons'), staticOpts));
 app.use('/public', express.static(path.join(__dirname, 'public'), staticOpts));
 app.use('/favicon.ico', express.static(path.join(__dirname, 'favicon.ico'), staticOpts));
-app.use('/docs', express.static(path.join(__dirname,'public','docs'), staticOpts));
+app.use('/docs', express.static(path.join(__dirname,'docs'), staticOpts));
 
 //Endpoints mínimos
 app.get('/health', (_, res) => res.json({ ok: true }));
@@ -62,7 +62,7 @@ app.post('/api/contact', (req, res) => {
 
 // Descarga forzada del cv
 app.get('/cv/download', (_req, res) => {
-  const file = path.join(__dirname, 'public', 'docs', 'anacv.pdf');
+  const file = path.join(__dirname, 'docs', 'anacv.pdf');
   res.download(file, 'anacv.pdf');
 });
 
