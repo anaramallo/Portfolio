@@ -1,9 +1,11 @@
-import { Component, HostListener, OnInit, inject } from '@angular/core';
+import {Component, HostListener, OnInit, inject, TrackByFunction} from '@angular/core';
 import { Router, NavigationEnd, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgClass, NgFor, NgOptimizedImage } from '@angular/common';
 import { filter } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
 import { FontLoaderService } from '../../font-loader.service';
+import {ContactModalService} from "../../../shared/services/contact-modal.service";
+type NavLink = { label: string; path: string };
 
 @Component({
   selector: 'app-header',
@@ -11,11 +13,11 @@ import { FontLoaderService } from '../../font-loader.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
   imports: [RouterLink, RouterLinkActive, NgClass, NgOptimizedImage, NgFor]
-
 })
+
 export class HeaderComponent implements OnInit {
 
-  constructor(private fonts: FontLoaderService) {}
+  constructor(private fonts: FontLoaderService, private contactModal: ContactModalService) {}
 
   private router = inject(Router);
 
@@ -37,8 +39,9 @@ export class HeaderComponent implements OnInit {
     { label: 'INICIO', path: '/' },
     { label: 'SOBRE MÍ', path: '/about' },
     { label: 'PROYECTOS', path: '/projects' },
-    { label: 'CONTACTO', path: '/contact' }
   ];
+
+  trackByLabel: TrackByFunction<NavLink> = (_, l) => l.label;
 
   ngOnInit(): void {
     this.fonts.loadExo2();
@@ -74,8 +77,6 @@ export class HeaderComponent implements OnInit {
     this.lockBody(false);
   }
 
-  trackByLabel = (_: number, link: { label: string }) => link.label;
-
   private updateScreenWidth() { this.isMobile = window.innerWidth < 768; }
   private lockBody(lock: boolean) { document.body.style.overflow = lock ? 'hidden' : ''; }
 
@@ -85,6 +86,20 @@ export class HeaderComponent implements OnInit {
 
   getLinkClasses() {
     return (this.isScrolled && !this.isMobile) ? 'text-black' : 'text-white';
+  }
+
+  onContactClick(e: Event) {
+    e.preventDefault();
+    this.closeMenu();
+    if (this.router.url !== '/') {
+      // si no estoy en Inicio, navega a Inicio y luego abre la modal
+      this.router.navigateByUrl('/').then(() =>
+        setTimeout(() => this.contactModal.open(), 0)
+      );
+    } else {
+      // ya estoy en Inicio: abre directamente
+      this.contactModal.open();
+    }
   }
 }
 
