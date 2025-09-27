@@ -24,8 +24,6 @@
     </h2>
   </div>
 
-
-
   <!--Texto máquina-->
   <div class="relative hero-content text-center px-4 md:px-8 mt-12 md:mt-16">
     <div class="text-iam text-amber-50 text-3xl md:text-5xl font-semibold">
@@ -49,132 +47,59 @@
     <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-6 md:mb-8 tracking-widest text-center">
       PROYECTOS DESTACADOS
     </h2>
-
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 items-stretch">
-
-      <!-- Tarjeta Proyecto 1 -->
-      <div class="bg-white p-4 sm:p-6 lg:p-8 rounded-2xl shadow-sm ring-1 ring-black/5
-                  transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:ring-black/10
-                  h-full flex flex-col">
-
-        <!-- Imagen -->
-        <div class="mb-4 md:mb-6">
-          <img [src]="API + '/images/p1_mlearning.jpg'"
-               alt="Análisis de Datos"
-               loading="lazy"
-               class="w-full rounded-xl aspect-[16/9] object-cover"/>
-        </div>
-
-        <!-- Contenido Principal -->
-        <div class="flex-grow text-center">
-          <h3 class="text-base sm:text-lg md:text-xl xl:text-2xl
-                     font-semibold text-gray-900
-                     leading-tight tracking-normal mb-3 md:mb-4">
-            ANÁLISIS DE DATOS
-          </h3>
-
-          <p class="text-sm sm:text-base md:text-base lg:text-lg
-                    text-gray-600 leading-relaxed
-                    mb-4 md:mb-6">
-            Procesamiento de datos usando Machine Learning para predecir tendencias de mercado.
-          </p>
-        </div>
-
-        <!-- Botón y Badges -->
-        <div class="mt-auto space-y-4">
-          <!-- Botón Ver más -->
-          <div class="text-center">
-            <a href="#"
-               class="inline-block px-4 sm:px-6 py-2 sm:py-2.5
-                      text-sm sm:text-base font-medium
-                      bg-sky-100 text-sky-700 rounded-lg
-                      hover:bg-sky-200 hover:scale-105
-                      transition-all duration-200
-                      cursor-not-allowed select-none
-                      focus-visible:outline focus-visible:outline-2
-                      focus-visible:outline-offset-2 focus-visible:outline-sky-600"
-               aria-disabled="true"
-               aria-label="Ver más sobre Análisis de Datos">
-              Ver más
-            </a>
-          </div>
-
-          <!-- Badges -->
-          <div class="flex flex-wrap justify-center gap-2 md:gap-3 lg:gap-4">
-            <span class="badge">Angular</span>
-            <span class="badge">Python</span>
-            <span class="badge">SQL</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tarjeta Proyecto 2 -->
-      <div class="bg-white p-4 sm:p-6 lg:p-8 rounded-2xl shadow-sm ring-1 ring-black/5
-                  transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:ring-black/10
-                  h-full flex flex-col">
+      <div *ngFor="let project of homeProjects; trackBy: trackByTitle"
+           class="bg-white p-4 sm:p-6 lg:p-8 rounded-2xl shadow-sm ring-1 ring-black/5
+              transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:ring-black/10
+              h-full flex flex-col">
 
         <!-- Imagen -->
         <div class="mb-4 md:mb-6">
-          <img [src]="API + '/images/p3_portfolio.png'"
-               alt="Portfolio Interactivo"
-               loading="lazy"
-               class="w-full rounded-xl aspect-[16/9] object-cover"/>
+          <img [ngSrc]="project.imageUrl"
+               [alt]="project.title"
+               width="1200" height="675"
+               class="w-full rounded-xl aspect-[16/9] object-cover"
+               loading="lazy" />
         </div>
 
-        <!-- Contenido Principal -->
+        <!-- Contenido centrado en inicio-->
         <div class="flex-grow text-center">
-          <h3 class="text-base sm:text-lg md:text-xl xl:text-2xl
-                     font-semibold text-gray-900
-                     leading-tight tracking-normal mb-3 md:mb-4">
-            PORTFOLIO INTERACTIVO
+          <h3 class="text-base sm:text-lg md:text-xl xl:text-2xl font-semibold text-gray-900
+                 leading-tight tracking-normal mb-3 md:mb-4">
+            {{ project.title }}
           </h3>
-
-          <p class="text-sm sm:text-base md:text-base lg:text-lg
-                    text-gray-600 leading-relaxed
-                    mb-4 md:mb-6">
-            SPA en Angular con diseño responsive y pruebas básicas de componentes.
+          <p class="text-sm sm:text-base md:text-base lg:text-lg text-gray-600 leading-relaxed mb-4 md:mb-6">
+            {{ project.description }}
           </p>
         </div>
 
-        <!-- Botón y Badges -->
+        <!-- reutilizar CTA + badges -->
         <div class="mt-auto space-y-4">
-          <!-- Botón Ver más -->
           <div class="text-center">
-            <a href="#"
-               class="inline-block px-4 sm:px-6 py-2 sm:py-2.5
-                      text-sm sm:text-base font-medium
-                      bg-sky-100 text-sky-700 rounded-lg
-                      hover:bg-sky-200 hover:scale-105
-                      transition-all duration-200
-                      focus-visible:outline focus-visible:outline-2
-                      focus-visible:outline-offset-2 focus-visible:outline-sky-600"
-               aria-label="Ver más sobre Portfolio Interactivo">
-              Ver más
-            </a>
+            <app-project-cta
+              [status]="project.status"
+              [href]="project.link"
+              variant="sky"
+              [ariaLabel]="'Ver más: ' + project.title">
+            </app-project-cta>
           </div>
-
-          <!-- Badges -->
-          <div class="flex flex-wrap gap-2 justify-center">
-            <span class="badge">Angular</span>
-            <span class="badge">Java</span>
-            <span class="badge">Node</span>
-            <span class="badge">Tailwind</span>
+          <div class="flex flex-wrap justify-center gap-2 md:gap-3 lg:gap-4" *ngIf="project.badges?.length">
+            <span class="badge" *ngFor="let tag of project.badges">{{ tag }}</span>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- Sección CTA Profesional Unificada -->
+<!-- Sección CTA Profesional unif -->
 <section id="contact-cta" class="py-16 md:py-20 bg-gradient-to-br from-gray-50 to-white">
   <div class="container mx-auto px-4 md:px-6 lg:px-8">
 
-    <!-- Contenido Principal -->
+    <!-- Content Principal -->
     <div class="max-w-4xl mx-auto text-center">
 
-      <!-- Título Principal -->
+      <!-- titulo Principal -->
       <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
         DESARROLLADORA DE SOFTWARE
       </h2>
@@ -184,7 +109,7 @@
         Especializada en Java
       </p>
 
-      <!-- Descripción Profesional -->
+      <!-- Descripción profesional -->
       <div class="max-w-3xl mx-auto mb-8 md:mb-12">
         <p class="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed mb-4">
           Soy <strong class="text-gray-800">Ana Mª Ramallo</strong>, desarrolladora con sólidos conocimientos en <strong class="text-gray-800">Java</strong>.
@@ -236,7 +161,7 @@
         </a>
       </div>
 
-      <!-- Enlaces Sociales Mejorados -->
+      <!-- Enlaces Sociales -->
       <div class="border-t border-gray-200 pt-8 md:pt-12">
         <h3 class="text-lg sm:text-xl font-semibold text-gray-800 mb-6">
           Conecta conmigo
