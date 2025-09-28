@@ -1,33 +1,47 @@
-import {Component, HostListener, OnInit, inject, TrackByFunction} from '@angular/core';
-import { Router, NavigationEnd, RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, HostListener, OnInit, TrackByFunction } from '@angular/core';
 import { NgClass, NgFor, NgOptimizedImage } from '@angular/common';
-import { filter } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
 import { FontLoaderService } from '../../font-loader.service';
-import {ContactModalService} from "../../../shared/services/contact-modal.service";
-type NavLink = { label: string; path: string };
+import { ContactModalService } from "../../../shared/services/contact-modal.service";
+
+type NavLink = { label: string; fragment: string };
 
 @Component({
   selector: 'app-header',
   standalone: true,
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
-  imports: [RouterLink, RouterLinkActive, NgClass, NgOptimizedImage, NgFor]
+  imports: [NgClass, NgOptimizedImage, NgFor]
 })
-
 export class HeaderComponent implements OnInit {
 
-  constructor(private fonts: FontLoaderService, private contactModal: ContactModalService) {}
+  constructor(
+    private fonts: FontLoaderService,
+    private contactModal: ContactModalService
+  ) {}
 
-  private router = inject(Router);
-
-  // === API / logos desde tu backend ===
+  // API URLs
   API = environment.API_BASE_URL;
   logoDark = `${this.API}/icons/arg_blancas.svg`;
   logoLight = `${this.API}/icons/arg_lilight.svg`;
-  headerBgUrl = `${this.API}/images/header.jpg`;
   menuIconBlack = `${this.API}/icons/menu.svg`;
   menuIconWhite = `${this.API}/icons/menublanco.svg`;
+
+  // Component state
+  menuOpen = false;
+  isScrolled = false;
+  isMobile = false;
+
+  // Navigation links
+  links: NavLink[] = [
+    { label: 'INICIO', fragment: 'home' },
+    { label: 'SOBRE MÍ', fragment: 'about-text' },
+    { label: 'PROYECTOS', fragment: 'projects-text' },
+  ];
+
+  trackByLabel: TrackByFunction<NavLink> = (_, link) => link.label;
+
+  // Getters
   get menuIcon(): string {
     return this.isScrolled ? this.menuIconBlack : this.menuIconWhite;
   }
@@ -36,33 +50,22 @@ export class HeaderComponent implements OnInit {
     return this.isScrolled ? this.logoDark : this.logoLight;
   }
 
-  menuOpen = false;
-  isScrolled = false;
-  isMobile = false;
-
-  links = [
-    { label: 'INICIO', path: '/' },
-    { label: 'SOBRE MÍ', path: '/about' },
-    { label: 'PROYECTOS', path: '/projects' },
-  ];
-
-  trackByLabel: TrackByFunction<NavLink> = (_, l) => l.label;
-
+  // Lifecycle
   ngOnInit(): void {
     this.fonts.loadExo2();
     this.updateScreenWidth();
-
-    // Cerrar menú al navegar
-    this.router.events
-      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
-      .subscribe(() => this.closeMenu());
   }
 
+  // Event listeners
   @HostListener('window:scroll')
-  onWindowScroll() { this.isScrolled = window.scrollY > 50; }
+  onWindowScroll() {
+    this.isScrolled = window.scrollY > 50;
+  }
 
   @HostListener('document:keydown.escape')
-  onEsc() { this.closeMenu(); }
+  onEsc() {
+    this.closeMenu();
+  }
 
   @HostListener('window:resize')
   onResize() {
@@ -71,42 +74,47 @@ export class HeaderComponent implements OnInit {
     if (wasMobile && !this.isMobile) this.closeMenu();
   }
 
+  // Menu methods
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
-    this.lockBody(this.menuOpen);
+    document.body.style.overflow = this.menuOpen ? 'hidden' : '';
   }
 
   closeMenu() {
     if (!this.menuOpen) return;
     this.menuOpen = false;
-    this.lockBody(false);
+    document.body.style.overflow = '';
   }
 
-  private updateScreenWidth() { this.isMobile = window.innerWidth < 768; }
-  private lockBody(lock: boolean) { document.body.style.overflow = lock ? 'hidden' : ''; }
-
-  getLogoClasses() {
-    return this.isScrolled ? 'text-black' : 'text-white';
+  // Navigation methods
+  onLinkClick(link: NavLink, event: Event) {
+    event.preventDefault();
+    this.closeMenu();
+    this.scrollToSection(link.fragment);
   }
 
+  onContactClick(event: Event) {
+    event.preventDefault();
+    this.closeMenu();
+    this.contactModal.open();
+  }
+
+  // Utility methods
   getLinkClasses() {
     return (this.isScrolled && !this.isMobile) ? 'text-black' : 'text-white';
   }
 
-  onContactClick(e: Event) {
-    e.preventDefault();
-    this.closeMenu();
-    if (this.router.url !== '/') {
-      // si no estoy en Inicio, navega a Inicio y luego abre la modal
-      this.router.navigateByUrl('/').then(() =>
-        setTimeout(() => this.contactModal.open(), 0)
-      );
-    } else {
-      // ya estoy en Inicio: abre directamente
-      this.contactModal.open();
+  private scrollToSection(fragmentId: string) {
+    const element = document.getElementById(fragmentId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
   }
+
+  private updateScreenWidth() {
+    this.isMobile = window.innerWidth < 768;
+  }
 }
-
-
-

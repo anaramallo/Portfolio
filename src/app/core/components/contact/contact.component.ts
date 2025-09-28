@@ -1,4 +1,7 @@
-import { Component, inject } from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
+import { ContactModalService } from "../../../shared/services/contact-modal.service";
+import { Subscription } from 'rxjs';
+
 import {
   ReactiveFormsModule,
   Validators,
@@ -17,9 +20,12 @@ import { environment } from '../../../../environments/environment';
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css'
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit, OnDestroy{
   private http = inject(HttpClient);
   private fb = inject(NonNullableFormBuilder);
+  private contactModal = inject(ContactModalService);
+  private subscription?: Subscription;
+  isModalOpen = false; // Nueva propiedad
 
   API = environment.API_BASE_URL;
 
@@ -57,5 +63,19 @@ export class ContactComponent {
       error: () => { this.error = 'Ha ocurrido un error. Inténtalo de nuevo.'; },
       complete: () => { this.loading = false; }
     });
+  }
+
+  ngOnInit() {
+    this.subscription = this.contactModal.open$.subscribe(() => {
+      this.isModalOpen = true;
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscription?.unsubscribe();
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
   }
 }
