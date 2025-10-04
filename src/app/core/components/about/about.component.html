@@ -1,1 +1,186 @@
-<p>about works!</p>
+<!-- HERO SOBRE MÍ -->
+<section id="about"
+         class="overflow-hidden bg-gray-100
+                h-[34vh] sm:h-[42vh] md:h-[52vh] lg:h-[60vh] xl:h-[64vh] 2xl:h-[66vh]">
+
+  <!-- Contenedor RELATIVO para img[fill] -->
+  <div class="relative h-full w-full">
+    <img
+      [ngSrc]="aboutImageUrl"
+      alt="Ana María"
+      fill
+      sizes="100vw"
+      priority
+      class="object-cover
+             /* encuadre: igual en md, subimos en lg/xl */
+             object-[50%_26%]
+             md:object-[50%_30%]
+             lg:object-[50%_20%]
+             xl:object-[50%_18%]
+             2xl:object-[50%_16%]
+             transition-[object-position] duration-300 ease-out" />
+  </div>
+</section>
+
+
+
+<!-- Texto bajo la imagen -->
+<section id="about-text" class="bg-white py-20 px-8">
+  <div class="container mx-auto max-w-5xl">
+
+    <!-- Título -->
+    <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-6 md:mb-8 tracking-widest text-left md:text-center">
+      ENTRE LÍNEAS
+    </h2>
+
+    <!-- Texto principal (centrado en md+) -->
+    <div class="max-w-prose text-sm md:text-lg text-gray-700 leading-relaxed font-normal mx-0 md:mx-auto text-left md:text-center">
+      <p class="mb-5">¡Buenas!</p>
+      <p class="mb-5">
+        Soy Ana y me encanta la idea de crear cosas con código. Para mí, programar no es solo escribir líneas en una pantalla,
+        sino dar vida a ideas que antes solo existían en mi cabeza.
+      </p>
+      <p class="mb-5">
+        Me gusta experimentar con nuevas tecnologías, equivocarme, romper, aprender y volver a intentarlo. Cada proyecto personal
+        es como un pequeño laboratorio donde pruebo y descubro.
+      </p>
+    </div>
+
+    <!-- Timeline debajo (vertical en móvil / horizontal en md+) -->
+    <div class="timeline relative mt-10 md:mt-14">
+
+      <!-- Línea vertical (solo móvil) -->
+      <div class="absolute left-3 top-0 bottom-0 w-px bg-blue-300/60 md:hidden"></div>
+      <!-- Línea horizontal (md+) -->
+      <div class="hidden md:block absolute inset-x-0 top-4 h-px bg-blue-300/60"></div>
+
+      <!-- Ítems: 1 col en móvil / 3 cols en md+ -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mt-0 md:mt-8">
+        <!-- 2020 -->
+        <div class="relative animate-on-scroll">
+          <span class="absolute top-1 md:top-0 -left-[7px] md:left-1/2 md:-translate-x-1/2
+                       block w-3 h-3 md:w-4 md:h-4 rounded-full bg-blue-600 ring-4 ring-white"></span>
+          <div class="pl-6 md:pl-0 md:pt-6 max-w-prose md:mx-auto text-left md:text-center">
+            <h3 class="text-base md:text-lg font-bold text-blue-700 leading-relaxed">2020</h3>
+            <p class="text-sm md:text-lg text-gray-700 leading-relaxed">
+              Descubriendo el desarrollo de software cursando
+              <span class="font-medium">Desarrollador de Aplicaciones Multiplataforma (DAM)</span>.
+            </p>
+          </div>
+        </div>
+
+        <!-- 2022 -->
+        <div class="relative animate-on-scroll">
+          <span class="absolute top-1 md:top-0 -left-[7px] md:left-1/2 md:-translate-x-1/2
+                       block w-3 h-3 md:w-4 md:h-4 rounded-full bg-blue-600 ring-4 ring-white"></span>
+          <div class="pl-6 md:pl-0 md:pt-6 max-w-prose md:mx-auto text-left md:text-center">
+            <h3 class="text-base md:text-lg font-bold text-blue-700 leading-relaxed">2022</h3>
+            <p class="text-sm md:text-lg text-gray-700 leading-relaxed">
+              Primeros pasos como <span class="font-medium">analista funcional en Altia</span> en un proyecto Inditex. Sigo aprendiendo actualmente.
+            </p>
+          </div>
+        </div>
+
+        <!-- Actualmente -->
+        <div class="relative animate-on-scroll">
+          <span class="absolute top-1 md:top-0 -left-[7px] md:left-1/2 md:-translate-x-1/2
+                       block w-3 h-3 md:w-4 md:h-4 rounded-full bg-blue-600 ring-4 ring-white"></span>
+          <div class="pl-6 md:pl-0 md:pt-6 max-w-prose md:mx-auto text-left md:text-center">
+            <h3 class="text-base md:text-lg font-bold text-blue-700 leading-relaxed">Actualmente</h3>
+            <p class="text-sm md:text-lg text-gray-700 leading-relaxed">
+              Continúo formándome en el <span class="font-medium">Grado de Ingeniería Informática</span> en la UNED.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="about-parallax"
+         class="relative py-20 px-4 sm:px-6 lg:px-8 bg-fixed bg-center bg-cover"
+         [style.backgroundImage]="'url(' + API + '/images/parallax.jpg)'">
+
+  <!-- Overlay -->
+  <div class="container mx-auto max-w-6xl relative z-10">
+    <!-- Grid Responsive de Educación y Experiencia -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 mt-12">
+
+      <!-- Tarjeta Educación -->
+      <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 lg:p-10
+                  flex flex-col items-center text-center
+                  transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+        <div class="flex flex-col items-center gap-4 mb-4">
+          <img [src]="API + '/icons/education.svg'"
+               alt="Icono Educación"
+               class="w-12 h-12">
+          <h3 class="text-base sm:text-lg md:text-xl xl:text-2xl
+                     font-semibold text-gray-900
+                     leading-tight tracking-normal mb-3 md:mb-4">
+            EDUCACIÓN
+          </h3>
+        </div>
+        <p class="text-xs sm:text-base md:text-lg text-gray-700 leading-relaxed font-normal text-justify flex-grow">
+          <span class="font-bold">Ciclo Superior en DAM:</span> Formación en Desarrollo de Aplicaciones Multiplataforma con bases sólidas en <span class="font-bold">Java</span>, desarrollo web (<span class="font-bold">HTML</span> y <span class="font-bold">CSS</span>), <span class="font-bold">bases de datos</span> y conocimientos básicos de desarrollo <span class="font-bold">Android.</span><br><br>
+          Actualmente, continúo mis estudios en <span class="font-bold">Ingeniería Informática</span> en la UNED, ampliando competencias en programación y buenas prácticas.
+        </p>
+      </div>
+
+      <!-- Tarjeta Experiencia -->
+      <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 lg:p-10
+                  flex flex-col items-center text-center
+                  transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+        <div class="flex flex-col items-center gap-4 mb-4">
+          <img [src]="API + '/icons/experience.svg'"
+               alt="Icono Experiencia Profesional"
+               class="w-12 h-12">
+          <h3 class="text-base sm:text-lg md:text-xl xl:text-2xl
+                     font-semibold text-gray-900
+                     leading-tight tracking-normal mb-3 md:mb-4">
+            EXPERIENCIA PROFESIONAL
+          </h3>
+        </div>
+        <p class="text-xs sm:text-base md:text-lg text-gray-700 leading-relaxed font-normal text-justify flex-grow">
+          <span class="font-bold">Analista Funcional en Altia</span> (Inditex). Detección y análisis de bugs en flujos críticos, corrección de datos en <span class="font-bold">bases de datos</span> y trazabilidad mediante logs. Configuración y validación de desarrollos en todos los entornos y coordinación con desarrollo y negocio.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Habilidades Técnicas-->
+<section id="skills-section" class="bg-white py-20 px-8">
+  <div class="container mx-auto max-w-5xl text-center">
+    <div class="mb-10">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-gray-900 mb-4 md:mb-6">HABILIDADES TÉCNICAS</h2>
+    </div>
+
+    <!-- Iconos de habilidades alineados horizontalmente -->
+    <div class="flex flex-wrap items-center justify-center gap-12 mt-12">
+      <!-- Icono Java -->
+      <div class="text-center">
+        <img [src]="API + '/icons/java.svg'" alt="Java" class="w-16 h-16 mx-auto mb-2" loading="lazy" width="64" height="64">      </div>
+
+      <!-- Icono HTML/CSS -->
+      <div class="text-center">
+        <img [src]="API + '/icons/css.svg'" alt="HTML & CSS" class="w-16 h-16 mx-auto mb-2" loading="lazy" width="64" height="64">      </div>
+
+      <!-- Icono JavaScript -->
+      <div class="text-center">
+        <img [src]="API + '/icons/js.svg'" alt="JavaScript" class="w-16 h-16 mx-auto mb-2" loading="lazy" width="64" height="64">      </div>
+
+      <!-- Icono Android Studio -->
+      <div class="text-center">
+        <img [src]="API + '/icons/android.svg'" alt="Android Studio" class="w-16 h-16 mx-auto mb-2" loading="lazy" width="64" height="64">      </div>
+
+      <!-- Icono SQL -->
+      <div class="text-center">
+        <img [src]="API + '/icons/sql.svg'" alt="Bases de Datos" class="w-16 h-16 mx-auto mb-2" loading="lazy" width="64" height="64">      </div>
+
+      <!-- Icono mongo -->
+      <div class="text-center">
+        <img [src]="API + '/icons/mongo.svg'" alt="MongoDB" class="w-16 h-16 mx-auto mb-2" loading="lazy" width="64" height="64">      </div>
+    </div>
+  </div>
+</section>

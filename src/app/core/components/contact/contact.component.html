@@ -1,1 +1,77 @@
-<p>contact works!</p>
+<section class="py-20">
+  <div class="container mx-auto px-4 max-w-xl">
+    <h2 class="text-3xl md:text-4xl font-bold mb-6">Contacto</h2>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="card p-6 grid gap-4">
+
+      <!-- Honeypot -->
+      <input type="text" formControlName="website" class="hidden" tabindex="-1" autocomplete="off">
+
+      <!-- Nombre -->
+      <label class="grid gap-1">
+        <span class="text-sm text-slate-600">Nombre</span>
+        <input
+          formControlName="name"
+          type="text"
+          placeholder="Tu nombre"
+          [attr.aria-invalid]="(form.get('name')?.invalid && form.get('name')?.touched) ? true : null"
+          class="px-4 py-2 rounded-lg bg-slate-900/5 ring-1 ring-slate-300
+                 focus:ring-2 focus:ring-sky-500 outline-none"
+        />
+        <small *ngIf="form.get('name')?.touched && form.get('name')?.invalid" class="text-rose-600">
+          Introduce al menos 2 caracteres.
+        </small>
+      </label>
+
+      <!-- Email -->
+      <label class="grid gap-1">
+        <span class="text-sm text-slate-600">Email</span>
+        <input
+          formControlName="email"
+          type="email"
+          placeholder="tucorreo@dominio.com"
+          inputmode="email"
+          autocomplete="email"
+          [attr.aria-invalid]="(form.get('email')?.invalid && form.get('email')?.touched) ? true : null"
+          class="px-4 py-2 rounded-lg bg-slate-900/5 ring-1 ring-slate-300
+                 focus:ring-2 focus:ring-sky-500 outline-none"
+        />
+        <small *ngIf="form.get('email')?.touched && form.get('email')?.invalid" class="text-rose-600">
+          Introduce un email válido.
+        </small>
+      </label>
+
+      <!-- Mensaje -->
+      <label class="grid gap-1">
+        <span class="text-sm text-slate-600">Mensaje</span>
+        <textarea
+          formControlName="message"
+          rows="5"
+          placeholder="Cuéntame en qué puedo ayudarte"
+          [attr.aria-invalid]="(form.get('message')?.invalid && form.get('message')?.touched) ? true : null"
+          class="px-4 py-2 rounded-lg bg-slate-900/5 ring-1 ring-slate-300
+                 focus:ring-2 focus:ring-sky-500 outline-none resize-y"
+        ></textarea>
+        <small *ngIf="form.get('message')?.touched && form.get('message')?.invalid" class="text-rose-600">
+          Escribe al menos 10 caracteres.
+        </small>
+      </label>
+
+      <!-- Botón -->
+      <button
+        type="submit"
+        [disabled]="loading"
+        class="mt-2 px-5 py-2 rounded-xl bg-sky-600 text-white font-semibold
+               hover:bg-sky-700 disabled:opacity-60 disabled:cursor-not-allowed transition"
+      >
+        {{ loading ? 'Enviando...' : 'Enviar' }}
+      </button>
+
+      <!-- Estados -->
+      <p *ngIf="sent" class="text-emerald-600 text-sm">¡Mensaje enviado! Te responderé pronto.</p>
+      <p *ngIf="error" class="text-rose-600 text-sm">{{ error }}</p>
+    </form>
+
+    <p class="mt-4 text-xs text-slate-500">API: {{ API }}</p>
+  </div>
+</section>

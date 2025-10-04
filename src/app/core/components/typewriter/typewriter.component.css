@@ -1,0 +1,13 @@
+.cursor {
+  animation: blink 0.7s steps(1) infinite;
+}
+
+/* Animación de parpadeo del cursor */
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}

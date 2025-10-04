@@ -1,1 +1,70 @@
-<p>projects works!</p>
+<section id="projects"
+         class="overflow-hidden bg-gray-100
+                h-[34vh] sm:h-[42vh] md:h-[52vh] lg:h-[60vh] xl:h-[64vh] 2xl:h-[66vh]">
+
+  <!-- Contenedor RELATIVO para img[fill] -->
+  <div class="relative h-full w-full">
+    <img
+      [ngSrc]="projectImageUrl"
+      alt="Proyectos"
+      fill
+      sizes="100vw"
+      priority
+      class="object-cover
+             /* encuadre: igual en md, subimos en lg/xl */
+             object-[50%_26%]
+             md:object-[50%_30%]
+             lg:object-[50%_20%]
+             xl:object-[50%_18%]
+             2xl:object-[50%_16%]
+             transition-[object-position] duration-300 ease-out" />
+  </div>
+</section>
+
+
+<section id="projects-text" class="py-16 sm:py-20 bg-gray-50">
+  <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Título + intro -->
+    <div class="text-center mb-8 sm:mb-10 md:mb-12">
+      <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-6 md:mb-8 tracking-widest">PROYECTOS</h2>
+      <p class="mt-3 text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
+        Aquí te dejo una selección de proyectos que reflejan mis conocimientos en el desarrollo de software y el diseño funcional.
+      </p>
+    </div>
+
+    <!-- Grid responsive de tarjetas -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 items-stretch">
+      <article *ngFor="let project of projects"
+               class="group bg-white rounded-2xl shadow-sm ring-1 ring-black/5
+                      transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:ring-black/10
+                      h-full flex flex-col relative">
+
+        <app-project-badge [status]="project.status"></app-project-badge>
+
+        <!-- Imagen (relación 16:9 para evitar saltos) -->
+        <img [ngSrc]="project.imageUrl"
+             [alt]="project.title"
+             width="1200" height="675"
+             class="w-full aspect-[16/9] object-cover rounded-t-2xl"
+             loading="lazy">
+
+        <!-- Contenido -->
+        <div class="p-4 sm:p-6 lg:p-8 flex flex-col flex-grow text-left">
+          <h3 class="text-base sm:text-lg md:text-xl font-semibold text-gray-900 mb-2">
+            {{ project.title }}
+          </h3>
+          <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-4 flex-grow">
+            {{ project.description }}
+          </p>
+          <!--CTA REUTILIZABLE: Decide qué mostrar -->
+          <app-project-cta
+            [status]="project.status"
+            [href]="project.link"
+            variant="sky"
+            [ariaLabel]="'Ver ' + project.title">
+          </app-project-cta>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
