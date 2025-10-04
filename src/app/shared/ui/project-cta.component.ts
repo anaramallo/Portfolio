@@ -1,7 +1,7 @@
 /*
  * Botón/CTA reutilizable
- * - Live + href → <a> activo
- * - Otros estados → <button disabled>
+ * Live + href → <a> activo
+ * Otros estados → <button disabled>
  */
 import { Component, Input } from '@angular/core';
 import { NgClass, NgIf } from '@angular/common';

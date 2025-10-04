@@ -18,7 +18,7 @@ export const PROJECTS: Readonly<Project[]> = [
     imagePath: 'images/p1_mlearning.jpg',
     link: '#',
     status: ProjectStatus.InProgress,
-    badges: ['Angular','Python','SQL'],
+    badges: ['Angular','Python','TensorFlow'],
     featured: true
   },
   {

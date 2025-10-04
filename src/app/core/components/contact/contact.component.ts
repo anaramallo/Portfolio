@@ -29,7 +29,6 @@ export class ContactComponent implements OnInit, OnDestroy{
 
   API = environment.API_BASE_URL;
 
-  // ✅ Typed forms: cada control es FormControl<string>
   form: FormGroup<{
     name: FormControl<string>;
     email: FormControl<string>;
