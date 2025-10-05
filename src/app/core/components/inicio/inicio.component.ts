@@ -103,5 +103,6 @@ He visto tu portfolio y me gustaría hablar contigo.`;
 
   trackByTitle: TrackByFunction<Project & { imageUrl: string }> = (_, p) => p.title;
   protected readonly encodeURIComponent = encodeURIComponent;
+  protected readonly environment = environment;
 }
 
