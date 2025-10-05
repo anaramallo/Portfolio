@@ -1,4 +1,7 @@
 export const environment = {
-  production: 'true',
-  API_BASE_URL: 'https://portfolio-api-dvx9.onrender.com' // url render
+  production: true,
+  API_BASE_URL: 'https://portfolio-api-dvx9.onrender.com', // url render
+  demoUrls: {
+    portfolio: 'https://www.anaramallo.dev'
+  }
 };

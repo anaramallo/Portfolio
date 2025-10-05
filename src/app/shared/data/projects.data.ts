@@ -1,4 +1,5 @@
 import {ProjectStatus} from "../types/project-status";
+import {environment} from "../../../environments/environment.prod";
 
 export interface Project {
   title: string;
@@ -25,7 +26,7 @@ export const PROJECTS: Readonly<Project[]> = [
     title: 'PORTFOLIO INTERACTIVO',
     description: 'SPA en Angular con diseño responsive y pruebas básicas de componentes.',
     imagePath: 'images/p3_portfolio.png',
-    link: '#',
+    link: environment.demoUrls.portfolio,
     status: ProjectStatus.Live,
     badges: ['Angular','Java','Node','Tailwind'],
     featured: true

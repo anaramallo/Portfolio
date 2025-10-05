@@ -10,26 +10,28 @@ const PORT = process.env.PORT || 5000;
 
 //CORS: limita a mis orígenes (ajustar tras desplegar en Vercel)
 const ALLOWED_ORIGINS = [
-  'http://localhost:4200',
-  'https://portfolio-od9xljtj4-anas-projects-32179dfc.vercel.app' //cambiar por mi dominio real de Vercel
+  'https://www.anaramallo.dev',   // dominio principal
+  'https://anaramallo.dev',       // apex (redirige a www)
+  'http://localhost:4200',        // dev local
+  'https://portfolio-omega-two-9ib5v0fkcf.vercel.app' // temporal
 ];
 
 app.use(cors({
   origin: (origin, cb) => {
-    if (
-      !origin ||
-      ALLOWED_ORIGINS.includes(origin) ||
-      /^https:\/\/.*\.vercel\.app$/.test(origin)
-    ) {
-      cb(null, true);
-    } else {
-      console.error("CORS blocked origin:", origin);
-      cb(new Error('CORS: origin not allowed'));
-    }
+    // peticiones sin Origin (curl/Postman/healthchecks)
+    if (!origin) return cb(null, true);
+    if (ALLOWED_ORIGINS.includes(origin)) return cb(null, true);
+    console.error('CORS blocked origin:', origin);
+    return cb(new Error('CORS: origin not allowed'));
   },
-  methods: ['GET','POST','OPTIONS'],
+  // habilitar si uso cookies o Authorization con credenciales en el front:
+  // credentials: true,
+  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
   allowedHeaders: ['Content-Type','Authorization']
 }));
+
+// Preflights
+app.options('*', cors());
 
 //Seguridad + compresión
 app.use(helmet({
