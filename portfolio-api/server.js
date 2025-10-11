@@ -13,7 +13,8 @@ const ALLOWED_ORIGINS = [
   'https://www.anaramallo.dev',   // dominio principal
   'https://anaramallo.dev',       // apex (redirige a www)
   'http://localhost:4200',        // dev local
-  'https://portfolio-omega-two-9ib5v0fkcf.vercel.app' // temporal
+  'https://portfolio-omega-two-9ib5v0fkcf.vercel.app',
+  'https://portfolio-production-f158.up.railway.app' // temporal
 ];
 
 app.use(cors({
