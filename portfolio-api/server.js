@@ -70,7 +70,7 @@ app.get('/cv/download', (_req, res) => {
 
 
 //5) Arranque
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
 
